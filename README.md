@@ -1,2 +1,2 @@
 # Guts
-Script de bash que te permite ver series desde la terminal
+![imagen-guts](https://github.com/danifreflow/Guts/blob/main/Guts/assets/guts.png)

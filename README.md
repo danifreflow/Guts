@@ -20,7 +20,7 @@ Ejemplo para ver primer capitulo de bersek
 ./Guts.sh bersek 1
 ```
 tambien hace busquedas de animes y te redirige al primer capitulo
-´´´bash
+```bash
 ./Guts.sh one
 1
 0 ah-my-goddess-2
@@ -64,7 +64,7 @@ Presiona 'n' para seguir iterando, 'a' para retroceder si no pulsa el numero que
 10 one-piece-adventure-of-nebulandia
 11 one-piece-episode-of-luffy-hand-island-no-bouken
 Presiona 'n' para seguir iterando, 'a' para retroceder si no pulsa el numero que quieres ver
-´´´
+```
 [ejemplo](https://github.com/danifreflow/Guts/blob/main/Guts/assets/recording.gif)
 
 ## TO -DO

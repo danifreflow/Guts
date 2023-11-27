@@ -24,6 +24,6 @@ Ejemplo para ver primer capitulo de bersek
 ## TO -DO
 Este script esta sin acabar por que no he tenido tiempo, pero acepto mejoras
 - [x] Buscar series desde el script
-- [ ] que sea paginable (es decir poder avanzar entre las distintas partes de la busqueda)
+- [x] que sea paginable (es decir poder avanzar entre las distintas partes de la busqueda)
 - [ ] guardar en el ordenador el capitulo por el que vas dependiendo de la serie
-- [ ] al imprimir los titulos poder hacer que te lleve a uno pulsando el numero al que pertenece, usar n para paginar
+- [x] al imprimir los titulos poder hacer que te lleve a uno pulsando el numero al que pertenece, usar n para paginar

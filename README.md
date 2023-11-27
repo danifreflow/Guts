@@ -27,3 +27,5 @@ Este script esta sin acabar por que no he tenido tiempo, pero acepto mejoras
 - [x] que sea paginable (es decir poder avanzar entre las distintas partes de la busqueda)
 - [ ] guardar en el ordenador el capitulo por el que vas dependiendo de la serie
 - [x] al imprimir los titulos poder hacer que te lleve a uno pulsando el numero al que pertenece, usar n para paginar
+- [ ] pasar de un capitulo al siguiente al terminar el mismo
+- [ ] dar opcion de descargar capitulos

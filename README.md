@@ -19,6 +19,52 @@ Ejemplo para ver primer capitulo de bersek
 ```bash
 ./Guts.sh bersek 1
 ```
+tambien hace busquedas de animes y te redirige al primer capitulo
+´´´bash
+./Guts.sh one
+1
+0 ah-my-goddess-2
+1 baka-to-test-to-shoukanjuu-christmas-special
+2 bayonetta-bloody-fate
+3 c-the-money-of-soul-and-possibility-control
+4 campione
+5 chuukan-kanriroku-tonegawa
+6 clione-no-akari
+7 cutie-honey-universe
+8 dr-stone
+9 dr-stone-new-world
+10 dr-stone-new-world-part-2
+11 dr-stone-ryuusui
+Presiona 'n' para seguir iterando, 'a' para retroceder si no pulsa el numero que quieres ver n
+2
+0 dr-stone-stone-wars
+1 dragon-ball-z-movie-01-the-deadzone
+2 evangelion-1-11-you-are-not-alone
+3 fairy-gone
+4 fairy-gone-2nd-season
+5 ghost-in-the-shell-arise-border4-ghost-stands-alone
+6 isekai-one-turn-kill-neesan-ane-douhan-no-isekai-seikatsu-hajimemashita
+7 isekai-wa-smartphone-to-tomo-ni
+8 isekai-wa-smartphone-to-tomo-ni-2
+9 jojo-no-kimyou-na-bouken-part-6-stone-ocean
+10 lv1-maou-to-one-room-yuusha
+11 majin-bone
+Presiona 'n' para seguir iterando, 'a' para retroceder si no pulsa el numero que quieres ver n
+3
+0 norn9-nornnonet
+1 one-outs
+2 one-piece
+3 one-piece-3d2y-ace-no-shi-wo-koete-luffy-nakama-tono-chikai
+4 one-piece-film-z
+5 one-piece-film-gold
+6 one-piece-film-red
+7 one-piece-movie-14-stampede
+8 one-piece-recap
+9 one-piece-special-glorious-island
+10 one-piece-adventure-of-nebulandia
+11 one-piece-episode-of-luffy-hand-island-no-bouken
+Presiona 'n' para seguir iterando, 'a' para retroceder si no pulsa el numero que quieres ver
+´´´
 [ejemplo](https://github.com/danifreflow/Guts/blob/main/Guts/assets/recording.gif)
 
 ## TO -DO

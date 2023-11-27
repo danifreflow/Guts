@@ -29,3 +29,4 @@ Este script esta sin acabar por que no he tenido tiempo, pero acepto mejoras
 - [x] al imprimir los titulos poder hacer que te lleve a uno pulsando el numero al que pertenece, usar n para paginar
 - [ ] pasar de un capitulo al siguiente al terminar el mismo
 - [ ] dar opcion de descargar capitulos
+- [ ] dar opcion de buscar los capitulos de una serie específica

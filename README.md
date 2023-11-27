@@ -19,7 +19,7 @@ Ejemplo para ver primer capitulo de bersek
 ```bash
 ./Guts.sh bersek 1
 ```
-[ejemplo](https://github.com/danifreflow/Guts/blob/main/Guts/assets/recording.webm)
+[ejemplo](https://github.com/danifreflow/Guts/blob/main/Guts/assets/recording.gif)
 
 ## TO -DO
 Este script esta sin acabar por que no he tenido tiempo, pero acepto mejoras

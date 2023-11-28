@@ -21,6 +21,7 @@ if [ "$#" -lt 2 ]; then
   while [[ "$respuesta" == "n" || "$respuesta" == "a" ]] ;do
     echo $pag
     wget  "https://jkanime.bz/buscar/$1/$pag/" -P /tmp > /dev/null 2>&1
+    # Falta investigar más; Ver https://www.shellcheck.net/wiki/SC2207
     urls=($(grep -A 1 '<div class="anime__item">' /tmp/index.html | awk -F 'href="' '/<a/{print $2}' | awk -F '"' '{print $1}' | xargs -n 1 basename))
     contador=0
     for url in "${urls[@]}";do
@@ -29,7 +30,7 @@ if [ "$#" -lt 2 ]; then
     done
     rm -rf /tmp/index.html
     
-    read -p "Presiona 'n' para seguir iterando, 'a' para retroceder si no pulsa el numero que quieres ver " respuesta
+    read -rp "Presiona 'n' para seguir iterando, 'a' para retroceder si no pulsa el numero que quieres ver " respuesta
     if [[ "$respuesta" =~ ^[0-9]+$ ]] && [ "$respuesta" -ge 0 ] && [ "$respuesta" -lt "${#urls[@]}" ]; then
     # Verificar si la respuesta es un número válido y dentro del rango del array
     url_seleccionada="${urls[$respuesta]}"
@@ -54,7 +55,7 @@ if [ "$#" -lt 2 ]; then
     rm -rf /tmp/jkanime.bz > /dev/null
 
     mpv "$url" > /dev/null
-    read -p "Quiere ver el siguiente capitulo pulse 's' " respuesta
+    read -rp "Quiere ver el siguiente capitulo pulse 's' " respuesta
   done
 
 fi
@@ -73,7 +74,7 @@ if [ "$#" -eq 2 ];then
 
     mpv "$url" > /dev/null
     ((capitulo++))
-    read -p "Quiere ver el siguiente capitulo pulse 's' " respuesta
+    read -rp "Quiere ver el siguiente capitulo pulse 's' " respuesta
 
   done
 fi

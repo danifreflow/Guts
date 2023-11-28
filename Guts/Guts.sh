@@ -34,7 +34,6 @@ add_a_tabla () {
 
 if [ "$#" -lt 1 ]; then
   echo "Uso: $0 <nombre-del-anime> <capitulo(numero)>"
-  crear_tabla
   exit 1
 fi
 

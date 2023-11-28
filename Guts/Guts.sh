@@ -26,8 +26,8 @@ crear_tabla () {
 }
 
 add_a_tabla () {
-  # local ruta=""$XDG_DATA_HOME"/.bdgec.db"
-  local ruta="$HOME/.local/share/.bdgec.db"
+  local ruta="$XDG_DATA_HOME/.bdgec.db"
+  # local ruta="$HOME/.local/share/.bdgec.db"
   local query="INSERT INTO capos (uri, numero) VALUES ($1, $2)"
   sqlite3 "$ruta" "$query"
 }

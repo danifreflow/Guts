@@ -12,6 +12,9 @@
 
 
 crear_tabla () {
+  if [[ -z "$XDG_DATA_HOME" ]]; then
+    exit 3
+  fi
   local ruta="$XDG_DATA_HOME/.bdgec.db"
   # local ruta="$HOME/.local/share/.bdgec.db"
   local query="CREATE TABLE capos (uri TEXT PRIMARY KEY,numero INTEGER DEFAULT 0);"

@@ -1,5 +1,4 @@
-#!/bin/bash
-
+#!/usr/bin/env bash
 # El objetivo de este script es ver anime desde la terminal sin anuncios
 # La pagina web a utilizar es jkanime por la limpieza de sus uris
 #

@@ -1,5 +1,4 @@
-#!/bin/bash
-
+#!/usr/bin/env bash
 # El objetivo de este script es ver anime desde la terminal sin anuncios
 # La pagina web a utilizar es jkanime por la limpieza de sus uris
 #
@@ -9,6 +8,34 @@
 #
 
 
+
+
+crear_tabla () {
+  if [[ -z "$XDG_DATA_HOME" ]]; then
+    exit 3
+  fi
+  local ruta="$XDG_DATA_HOME/.bdgec.db"
+  # local ruta="$HOME/.local/share/.bdgec.db"
+  local query="CREATE TABLE capos (uri TEXT PRIMARY KEY,numero INTEGER DEFAULT 0);"
+  if [[ ! -e "$ruta" ]]; then
+    echo "Creando Base de Datos en $ruta ..."
+    touch "$ruta"
+    sqlite3 "$ruta" "$query"
+  elif [[ ! -f "$ruta" ]]; then
+    echo "Existe $ruta como directorio. Abortando operación"
+    exit 2
+  fi
+}
+
+add_a_tabla () {
+  # acepta dos valores, la uri y el número
+  # la uri es $respuesta_seleccionada, por ejemplo
+  # y el numero es el capitulo que se está reproduciendo, por ejemplo
+  local ruta="$XDG_DATA_HOME/.bdgec.db"
+  # local ruta="$HOME/.local/share/.bdgec.db"
+  local query="INSERT INTO capos (uri,numero) VALUES ('$1', $2);"
+  sqlite3 "$ruta" "$query"
+}
 
 if [ "$#" -lt 1 ]; then
   echo "Uso: $0 <nombre-del-anime> <capitulo(numero)>"

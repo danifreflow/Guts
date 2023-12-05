@@ -37,6 +37,14 @@ add_a_tabla () {
   sqlite3 "$ruta" "$query"
 }
 
+# ejemplo: reproducir_serie_capitulo one-piece 10
+reproducir_serie_capitulo() {
+  wget -p "https://jkanime.bz/$1/$2/" -P /tmp > /dev/null 2>&1
+  url="$(grep -A 1 video /tmp/jkanime.bz/um.php* | grep url | cut -d "'" -f2 | head -n1)"
+  rm -rf /tmp/jkanime.bz > /dev/null
+  mpv "$url" > /dev/null
+ }
+
 if [ "$#" -lt 1 ]; then
   echo "Uso: $0 <nombre-del-anime> <capitulo(numero)>"
   exit 1
@@ -75,13 +83,7 @@ if [ "$#" -lt 2 ]; then
   capitulo=0
   while [ "$respuesta" == "s" ] ;do
     ((capitulo++))
-    wget -p "https://jkanime.bz/$url_seleccionada/$capitulo/" -P /tmp > /dev/null 2>&1
-
-    url="$(grep -A 1 video /tmp/jkanime.bz/um.php* | grep url | cut -d "'" -f2 | head -n1)"
-
-    rm -rf /tmp/jkanime.bz > /dev/null
-
-    mpv "$url" > /dev/null
+    reproducir_serie_capitulo "$url_seleccionada" "$capitulo"
     read -rp "Quiere ver el siguiente capitulo pulse 's' " respuesta
   done
 
@@ -92,20 +94,9 @@ if [ "$#" -eq 2 ];then
   respuesta=s
   capitulo=$2
   while [ "$respuesta" == "s" ] ;do
-
-    wget -p "https://jkanime.bz/$1/$capitulo/" -P /tmp > /dev/null 2>&1
-
-    url="$(grep -A 1 video /tmp/jkanime.bz/um.php* | grep url | cut -d "'" -f2 | head -n1)"
-
-    rm -rf /tmp/jkanime.bz > /dev/null
-
-    mpv "$url" > /dev/null
+    reproducir_serie_capitulo "$1" "$capitulo"
     ((capitulo++))
     read -rp "Quiere ver el siguiente capitulo pulse 's' " respuesta
-
   done
 fi
-
-
-
 

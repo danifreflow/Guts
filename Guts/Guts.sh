@@ -10,6 +10,7 @@
 
 
 
+# Funciones
 crear_tabla () {
   if [[ -z "$XDG_DATA_HOME" ]]; then
     exit 3
@@ -37,12 +38,18 @@ add_a_tabla () {
   sqlite3 "$ruta" "$query"
 }
 
-# ejemplo: reproducir_serie_capitulo one-piece 10
-reproducir_serie_capitulo() {
-  wget -p "https://jkanime.bz/$1/$2/" -P /tmp > /dev/null 2>&1
-  url="$(grep -A 1 video /tmp/jkanime.bz/um.php* | grep url | cut -d "'" -f2 | head -n1)"
-  rm -rf /tmp/jkanime.bz > /dev/null
-  mpv "$url" > /dev/null
+# ejemplo: reproducir_anime_capitulo one-piece 10
+reproducir_anime_capitulo() {
+  while [ "$respuesta" = "s" ] ;do
+    wget -p "https://jkanime.bz/$1/$2/" -P /tmp > /dev/null 2>&1
+    url="$(grep -A 1 video /tmp/jkanime.bz/um.php* | grep url | cut -d "'" -f2 | head -n1)"
+    rm -rf /tmp/jkanime.bz > /dev/null
+    mpv "$url" > /dev/null
+    ((capitulo++))
+    clear
+    printf "Introduce 's' para ver el capítulo %s: " $capitulo
+    read -r respuesta
+  done
 }
 
 mostrar_ayuda() {
@@ -56,10 +63,12 @@ mostrar_ayuda() {
   printf "\n\n"
   printf "Búsqueda: %s <búsqueda>" "$script"
   printf "\n"
-  printf "\tEjemplo: %s \"one piece\"\n" "$script"
+  printf "\tEjemplo: %s \"one piece\"" "$script"
+  printf "\n"
 }
 
 
+# Script
 if [ "$#" -lt 1 ] || [ "$#" -gt 2 ]; then
   mostrar_ayuda
   exit 1
@@ -68,50 +77,40 @@ fi
 if [ "$#" -eq 1 ]; then
   respuesta=n
   pag=1
-  while [[ "$respuesta" == "n" || "$respuesta" == "a" ]] ;do
-    echo $pag
+  while [ "$respuesta" = "n" ] || [ "$respuesta" = "a" ] ;do
+    # Obtenemos urls
     wget  "https://jkanime.bz/buscar/$1/$pag/" -P /tmp > /dev/null 2>&1
-    # Falta investigar más; Ver https://www.shellcheck.net/wiki/SC2207
-    urls=($(grep -A 1 '<div class="anime__item">' /tmp/index.html | awk -F 'href="' '/<a/{print $2}' | awk -F '"' '{print $1}' | xargs -n 1 basename))
-    contador=0
-    for url in "${urls[@]}";do
-      echo "$contador $url"
-      ((contador++))
-    done
+    urls=$(grep -A 1 '<div class="anime__item">' /tmp/index.html | awk -F 'href="' '/<a/{print $2}' | awk -F '"' '{print $1}' | xargs -n 1 basename)
     rm -rf /tmp/index.html
-    
-    read -rp "Presiona 'n' para seguir iterando, 'a' para retroceder si no pulsa el numero que quieres ver " respuesta
-    if [[ "$respuesta" =~ ^[0-9]+$ ]] && [ "$respuesta" -ge 0 ] && [ "$respuesta" -lt "${#urls[@]}" ]; then
-    # Verificar si la respuesta es un número válido y dentro del rango del array
-    url_seleccionada="${urls[$respuesta]}"
-    # echo "Seleccionaste: $url_seleccionada"
-    elif [ "$respuesta" == "a" ];then
-      if [ "$pag" -gt 1 ];then
-        ((pag--))
-      fi
+
+    # Mostramos las opciones
+    clear
+    echo "Página $pag"
+    echo "$urls" | sed -e "s/^\([a-z]\)/\U\1/g" -e "s/-\([a-z]\)/-\U\1/g" -e "s/-/ /g" | nl -n ln
+
+    # Leemos la respuesta del usuario
+    printf "Introduce un número de anime, 'n' para ir a la siguiente página o 'a' para ir a la anterior: "
+    read -r respuesta
+
+    # Verificamos si la respuesta es un número y está dentro del rango
+    if [ "$respuesta" -eq "$respuesta" ] 2>/dev/null && [ "$respuesta" -ge 1 ] && [ "$respuesta" -le "$(echo "$urls" | wc -l)" ]; then
+      anime_seleccionado="$(echo "$urls" | sed "${respuesta}q;d" | cut -d' ' -f2-)"
+    elif [ "$respuesta" = "a" ]; then
+      [ "$pag" -gt 1 ] && pag=$((pag-1))
     else
-      ((pag++))
+      pag=$((pag+1))
       respuesta=n
     fi
   done
   respuesta=s
-  capitulo=0
-  while [ "$respuesta" == "s" ] ;do
-    ((capitulo++))
-    reproducir_serie_capitulo "$url_seleccionada" "$capitulo"
-    read -rp "Quiere ver el siguiente capitulo pulse 's' " respuesta
-  done
-
+  capitulo=1
+  reproducir_anime_capitulo "$anime_seleccionado" "$capitulo"
 fi
-
 
 if [ "$#" -eq 2 ];then
   respuesta=s
   capitulo=$2
-  while [ "$respuesta" == "s" ] ;do
-    reproducir_serie_capitulo "$1" "$capitulo"
-    ((capitulo++))
-    read -rp "Quiere ver el siguiente capitulo pulse 's' " respuesta
-  done
+  anime_seleccionado=$1
+  reproducir_anime_desde "$anime_seleccionado" "$capitulo"
 fi
 

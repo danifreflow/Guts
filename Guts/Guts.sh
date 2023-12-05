@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 # El objetivo de este script es ver anime desde la terminal sin anuncios
 # La pagina web a utilizar es jkanime por la limpieza de sus uris
 #
@@ -12,17 +12,17 @@
 
 # Funciones
 crear_tabla () {
-  if [[ -z "$XDG_DATA_HOME" ]]; then
+  if [ -z "$XDG_DATA_HOME" ]; then
     exit 3
   fi
-  local ruta="$XDG_DATA_HOME/.bdgec.db"
+  ruta="$XDG_DATA_HOME/.bdgec.db"
   # local ruta="$HOME/.local/share/.bdgec.db"
-  local query="CREATE TABLE capos (uri TEXT PRIMARY KEY,numero INTEGER DEFAULT 0);"
-  if [[ ! -e "$ruta" ]]; then
+  query="CREATE TABLE capos (uri TEXT PRIMARY KEY,numero INTEGER DEFAULT 0);"
+  if [ ! -e "$ruta" ]; then
     echo "Creando Base de Datos en $ruta ..."
     touch "$ruta"
     sqlite3 "$ruta" "$query"
-  elif [[ ! -f "$ruta" ]]; then
+  elif [ ! -f "$ruta" ]; then
     echo "Existe $ruta como directorio. Abortando operación"
     exit 2
   fi
@@ -32,20 +32,22 @@ add_a_tabla () {
   # acepta dos valores, la uri y el número
   # la uri es $respuesta_seleccionada, por ejemplo
   # y el numero es el capitulo que se está reproduciendo, por ejemplo
-  local ruta="$XDG_DATA_HOME/.bdgec.db"
+  ruta="$XDG_DATA_HOME/.bdgec.db"
   # local ruta="$HOME/.local/share/.bdgec.db"
-  local query="INSERT INTO capos (uri,numero) VALUES ('$1', $2);"
+  query="INSERT INTO capos (uri,numero) VALUES ('$1', $2);"
   sqlite3 "$ruta" "$query"
 }
 
 # ejemplo: reproducir_anime_capitulo one-piece 10
 reproducir_anime_capitulo() {
+  anime=$1
+  capitulo=$2
   while [ "$respuesta" = "s" ] ;do
-    wget -p "https://jkanime.bz/$1/$2/" -P /tmp > /dev/null 2>&1
+    wget -p "https://jkanime.bz/$anime/$capitulo/" -P /tmp > /dev/null 2>&1
     url="$(grep -A 1 video /tmp/jkanime.bz/um.php* | grep url | cut -d "'" -f2 | head -n1)"
     rm -rf /tmp/jkanime.bz > /dev/null
     mpv "$url" > /dev/null
-    ((capitulo++))
+    capitulo=$((capitulo+1))
     clear
     printf "Introduce 's' para ver el capítulo %s: " $capitulo
     read -r respuesta
@@ -111,6 +113,6 @@ if [ "$#" -eq 2 ];then
   respuesta=s
   capitulo=$2
   anime_seleccionado=$1
-  reproducir_anime_desde "$anime_seleccionado" "$capitulo"
+  reproducir_anime_capitulo "$anime_seleccionado" "$capitulo"
 fi
 

@@ -43,14 +43,29 @@ reproducir_serie_capitulo() {
   url="$(grep -A 1 video /tmp/jkanime.bz/um.php* | grep url | cut -d "'" -f2 | head -n1)"
   rm -rf /tmp/jkanime.bz > /dev/null
   mpv "$url" > /dev/null
- }
+}
 
-if [ "$#" -lt 1 ]; then
-  echo "Uso: $0 <nombre-del-anime> <capitulo(numero)>"
+mostrar_ayuda() {
+  script="$(basename "$0")"
+
+  printf "Uso: %s [ARGUMENTOS]" "$script"
+  printf "\n\n"
+  printf "Reproducir: %s <nombre-del-anime> <capitulo(numero)>" "$script"
+  printf "\n"
+  printf "\tEjemplo: %s one-piece 10" "$script"
+  printf "\n\n"
+  printf "Búsqueda: %s <búsqueda>" "$script"
+  printf "\n"
+  printf "\tEjemplo: %s \"one piece\"\n" "$script"
+}
+
+
+if [ "$#" -lt 1 ] || [ "$#" -gt 2 ]; then
+  mostrar_ayuda
   exit 1
 fi
 
-if [ "$#" -lt 2 ]; then
+if [ "$#" -eq 1 ]; then
   respuesta=n
   pag=1
   while [[ "$respuesta" == "n" || "$respuesta" == "a" ]] ;do

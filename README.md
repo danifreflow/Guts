@@ -1,21 +1,4 @@
 # Guts
-## IMPORTANTE
-Necesito ayuda actualmente en el script , estoy implementando una base de datos que es un archivo de texto pero cuando hago las peticiones me da el siguiente error
-en el **wget**
-```
---2024-03-08 12:05:37--  https://jkanime.bz///
-Cargado certificado CA '/etc/ssl/certs/ca-certificates.crt'
-Resolviendo jkanime.bz (jkanime.bz)... 104.21.86.206, 172.67.136.207, 2606:4700:3033::ac43:88cf, ...
-Conectando con jkanime.bz (jkanime.bz)[104.21.86.206]:443... conectado.
-Petición HTTP enviada, esperando respuesta... 301 Moved Permanently
-Localización: https://jkanime.net/ [siguiendo]
---2024-03-08 12:05:38--  https://jkanime.net/
-Resolviendo jkanime.net (jkanime.net)... 172.67.73.66, 104.26.6.237, 104.26.7.237, ...
-Conectando con jkanime.net (jkanime.net)[172.67.73.66]:443... conectado.
-Petición HTTP enviada, esperando respuesta... 403 Forbidden
-2024-03-08 12:05:38 ERROR 403: Forbidden.
-```
-Por favor si alquien sabe a que se debe que me avise , puesto que las mismas peticiones si funcionan cuando haces la busqueda directa, muchas Gracias
 
 ![imagen-guts](https://github.com/danifreflow/Guts/blob/main/Guts/assets/guts.png)
 

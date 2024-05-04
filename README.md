@@ -13,7 +13,7 @@ El script tiene las siguientes dependencias
 - mpv
 - awk
 - xargs
-- sqlite
+
 
 Actualmente recibe dos parametros de entrada **"titulo-del-anime-sin-espacion" "num-capitulo"**
 Ejemplo para ver primer capitulo de bersek
@@ -72,7 +72,7 @@ Presiona 'n' para seguir iterando, 'a' para retroceder si no pulsa el numero que
 Este script esta sin acabar por que no he tenido tiempo, pero acepto mejoras
 - [x] Buscar series desde el script
 - [x] que sea paginable (es decir poder avanzar entre las distintas partes de la busqueda)
-- [ ] guardar en el ordenador el capitulo por el que vas dependiendo de la serie
+- [x] guardar en el ordenador el capitulo por el que vas dependiendo de la serie
 - [x] al imprimir los titulos poder hacer que te lleve a uno pulsando el numero al que pertenece, usar n para paginar
 - [x] pasar de un capitulo al siguiente al terminar el mismo
 - [ ] dar opcion de descargar capitulos

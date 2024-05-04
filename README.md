@@ -6,6 +6,15 @@ Este Script esta basado en el video de youtube de [anime desde terminal](https:/
 de [Houman](https://houmanr.xyz/) , tambien se inspira en proyectos angloparlantes como
 [ani-cli](https://github.com/pystardust/ani-cli)
 
+# Instalación
+para instalarte el script en tu bash, descargate el archivo Guts y ejecuta el siguiente comando:
+
+```
+sudo cp Guts /usr/bin
+```
+
+Asi podras usar Guts desde la terminal en cualquier momento.
+
 ## Funcionamineto del script
 El script tiene las siguientes dependencias 
 - grep

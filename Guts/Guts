@@ -12,7 +12,7 @@ reproducir_anime_capitulo() {
   sleep 5
   while [ "$respuesta" = "s" ] ;do
     envio="https://jkanime.bz/$anime/$capitulo"
-    echo $envio
+    # echo $envio
     wget -p  $envio -P /tmp > /dev/null 2>&1
     url="$(grep -A 1 video /tmp/jkanime.bz/um.php* | grep url | cut -d "'" -f2 | head -n1)"
     sleep 10

@@ -66,6 +66,13 @@ Presiona 'n' para seguir iterando, 'a' para retroceder si no pulsa el numero que
 11 one-piece-episode-of-luffy-hand-island-no-bouken
 Presiona 'n' para seguir iterando, 'a' para retroceder si no pulsa el numero que quieres ver
 ```
+Por ultimo, podemos usar la base de datos implementada con el flag -d
+
+```
+Guts -d
+```
+
+
 [ejemplo](https://github.com/danifreflow/Guts/blob/main/Guts/assets/recording.gif)
 
 ## TO -DO

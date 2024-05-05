@@ -7,12 +7,12 @@
 reproducir_anime_capitulo() {
   anime=$1
   capitulo=$2
+  clear
   echo $anime
   echo $capitulo
   sleep 5
   while [ "$respuesta" = "s" ] ;do
     envio="https://jkanime.bz/$anime/$capitulo"
-    # echo $envio
     wget -p  $envio -P /tmp > /dev/null 2>&1
     url="$(grep -A 1 video /tmp/jkanime.bz/um.php* | grep url | cut -d "'" -f2 | head -n1)"
     sleep 10
@@ -29,6 +29,37 @@ reproducir_anime_capitulo() {
      guardar_en_db "$anime" "$capitulo"
   fi
 }
+
+# Funciones
+# ejemplo: descargar_anime_capitulo one-piece 10
+descargar_anime_capitulo() {
+  anime=$1
+  capitulo=$2
+  clear
+  echo $anime
+  echo $capitulo
+  sleep 5
+  while [ "$respuesta" = "s" ] ;do
+    envio="https://jkanime.bz/$anime/$capitulo"
+    wget -p  $envio -P /tmp > /dev/null 2>&1
+    url="$(grep -A 1 video /tmp/jkanime.bz/um.php* | grep url | cut -d "'" -f2 | head -n1)"
+    sleep 10
+    rm -rf /tmp/jkanime.bz > /dev/null
+    echo $url
+    ffmpeg  -i "$url" -codec copy "$HOME/Guts/$anime-$capitulo.mp4"
+    capitulo=$((capitulo+1))
+    clear
+    printf "Introduce 's' para ver el capítulo %s (cualquier otro valor para pasar): " $capitulo
+    read -r respuesta
+  done
+  printf "Introduce 'g' para guardar la serie %s en la base de datos: " $anime
+  read -r guardar
+  if [ "$guardar" = "g" ]; then
+     guardar_en_db "$anime" "$capitulo"
+  fi
+  
+}
+
 
 mostrar_ayuda() {
   script="$(basename "$0")"
@@ -83,10 +114,28 @@ guardar_en_db() {
 
 
 # Script
+#
+
+flag_descarga=false
+clear
+echo "¿Vas a queres descargar el capitulos [s/N]?"
+download=N
+read -r download
+if [ "$download" == "s" ]; then
+  flag_descarga=true
+fi
+if [ "$download" == "S" ]; then
+  flag_descarga=true
+fi
 
 if [ ! -d "$HOME/.config/Guts" ]; then
     mkdir -p "$HOME/.config/Guts"
     echo "El directorio $HOME/.config/Guts ha sido creado."
+fi
+
+if [ ! -d "$HOME/Guts" ]; then
+    mkdir -p "$HOME/Guts"
+    echo "El directorio $HOME/Guts ha sido creado."
 fi
 
 
@@ -109,7 +158,11 @@ if [ "$#" -eq 1 ]; then
     IFS=',' read -r anime_seleccionado capitulo <<< "$(sed -n "${numero}p" $HOME/.config/Guts/db.txt)"
     anime_seleccionado="${anime_seleccionado// /}"
     capitulo="${capitulo// /}"
-    reproducir_anime_capitulo "$anime_seleccionado" "$capitulo" 
+    if [ "$flag_descarga" = true ]; then
+      descargar_anime_capitulo "$anime_seleccionado" "$capitulo"
+    else
+      reproducir_anime_capitulo "$anime_seleccionado" "$capitulo"
+    fi
   else
     respuesta=n
     pag=1
@@ -142,8 +195,11 @@ if [ "$#" -eq 1 ]; then
     clear
     echo "¿que capítulo quiere ver ?"
     read -r capitulo
-    reproducir_anime_capitulo "$anime_seleccionado" "$capitulo"
-    
+    if [ "$flag_descarga" = true ]; then
+      descargar_anime_capitulo "$anime" "$capitulo"
+    else
+      reproducir_anime_capitulo "$anime" "$capitulo"
+    fi
   fi
 
 fi
@@ -152,6 +208,10 @@ if [ "$#" -eq 2 ];then
   respuesta=s
   capitulo=$2
   anime_seleccionado=$1
-  reproducir_anime_capitulo "$anime_seleccionado" "$capitulo"
+  if [ "$flag_descarga" = true ]; then
+    descargar_anime_capitulo "$anime" "$capitulo"
+  else
+    reproducir_anime_capitulo "$anime" "$capitulo"
+  fi
 fi
 

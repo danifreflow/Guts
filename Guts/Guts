@@ -196,9 +196,9 @@ if [ "$#" -eq 1 ]; then
     echo "¿que capítulo quiere ver ?"
     read -r capitulo
     if [ "$flag_descarga" = true ]; then
-      descargar_anime_capitulo "$anime" "$capitulo"
+      descargar_anime_capitulo "$anime_seleccionado" "$capitulo"
     else
-      reproducir_anime_capitulo "$anime" "$capitulo"
+      reproducir_anime_capitulo "$anime_seleccionado" "$capitulo"
     fi
   fi
 
@@ -209,9 +209,9 @@ if [ "$#" -eq 2 ];then
   capitulo=$2
   anime_seleccionado=$1
   if [ "$flag_descarga" = true ]; then
-    descargar_anime_capitulo "$anime" "$capitulo"
+    descargar_anime_capitulo "$anime_seleccionado" "$capitulo"
   else
-    reproducir_anime_capitulo "$anime" "$capitulo"
+    reproducir_anime_capitulo "$anime_seleccionado" "$capitulo"
   fi
 fi
 

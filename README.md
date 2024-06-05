@@ -11,7 +11,7 @@ para instalarte el script en tu bash, descargate el archivo Guts y ejecuta el si
 
 ```
 sudo cp Guts /usr/bin
-sudo chmod 755 /usr/bin/Guts #para que se pueda ejecutar
+sudo chmod 755 /usr/bin/Guts
 ```
 
 Asi podras usar Guts desde la terminal en cualquier momento.

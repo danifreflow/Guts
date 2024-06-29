@@ -10,14 +10,9 @@ de [Houman](https://houmanr.xyz/) , tambien se inspira en proyectos angloparlant
 para instalarte el script en tu bash, descargate el archivo Guts y ejecuta los siguientes comandos:
 
 ```
-sudo cp Guts /usr/bin
+sudo cp Guts /usr/bin && sudo chmod 755 /usr/bin/Guts
 ```
 
-y:
-
-```
-sudo chmod 755 /usr/bin/Guts
-```
 
 Asi podras usar Guts desde la terminal en cualquier momento.
 

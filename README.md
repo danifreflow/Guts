@@ -23,6 +23,7 @@ El script tiene las siguientes dependencias
 - mpv
 - awk
 - xargs
+- ffmpeg
 
 
 Actualmente recibe dos parametros de entrada **"titulo-del-anime-sin-espacion" "num-capitulo"**

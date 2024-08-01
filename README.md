@@ -84,7 +84,7 @@ Guts -d
 ```
 
 
-[ejemplo](https://github.com/danifreflow/Guts/blob/main/Guts/assets/recording.gif)
+![ejemplo](https://github.com/danifreflow/Guts/blob/main/Guts/assets/recording.gif)
 
 ## TO -DO
 Este script esta sin acabar por que no he tenido tiempo, pero acepto mejoras

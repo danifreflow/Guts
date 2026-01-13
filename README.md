@@ -1,4 +1,4 @@
-# LA PAGINA WEB DE DONDE SACA LOS VIDEOS ESTA CAIDA, por favor si alguien quiere participar buscando una pagina sustituta, los PR están abiertos
+# LA PAGINA WEB DE DONDE SACA LOS VIDEOS ESTA CAPADA (403 Forbidden), por favor si alguien quiere participar buscando una pagina sustituta, los PR están abiertos
 
 
 
